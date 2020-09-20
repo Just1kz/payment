@@ -1,6 +1,12 @@
 package payment.Common;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Date;
+
+@Getter
+@Setter
 
 public class PaymentPhone {
     private int id;
@@ -18,62 +24,6 @@ public class PaymentPhone {
         this.date = new Date();
         this.phone = phone;
         this.paymentCurrency = paymentCurrency;
-        this.paymentAmount = paymentAmount;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Account getAscAccount() {
-        return ascAccount;
-    }
-
-    public void setAscAccount(Account ascAccount) {
-        this.ascAccount = ascAccount;
-    }
-
-    public Account getDscAccount() {
-        return dscAccount;
-    }
-
-    public void setDscAccount(Account dscAccount) {
-        this.dscAccount = dscAccount;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public CurrencyPayment getPaymentCurrency() {
-        return paymentCurrency;
-    }
-
-    public void setPaymentCurrency(CurrencyPayment paymentCurrency) {
-        this.paymentCurrency = paymentCurrency;
-    }
-
-    public double getPaymentAmount() {
-        return paymentAmount;
-    }
-
-    public void setPaymentAmount(double paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
 

@@ -1,8 +1,15 @@
 package payment.Application;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import payment.Common.PaymentPhone;
 import java.util.ArrayList;
 import java.util.List;
+
+@Getter
+@Setter
+@AllArgsConstructor
 
 public class Application {
     private String host;
@@ -12,45 +19,6 @@ public class Application {
     private final List<PaymentPhone> paymentPhones = new ArrayList<>();
     private int ids = 1;
     private int size = 0;
-
-    public Application(String host, String ip, String port, String protocol) {
-        this.host = host;
-        this.ip = ip;
-        this.port = port;
-        this.protocol = protocol;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-    }
-
-    public String getProtocol() {
-        return protocol;
-    }
-
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
-    }
 
     public PaymentPhone add(PaymentPhone paymentPhone) {
         paymentPhone.checkPrefix().checkLength().checkCurrency().checkAmount();
