@@ -1,10 +1,7 @@
 package payment.Server;
 
 import org.junit.Test;
-import payment.Common.Account;
-import payment.Common.CurrencyPayment;
-import payment.Common.PaymentPhone;
-import payment.Common.TypeAccount;
+import payment.Common.*;
 import payment.User.User;
 
 import static org.hamcrest.core.Is.is;
@@ -54,7 +51,7 @@ public class ServerTest {
         server.addAccount(user.getPassport(), new Account(TypeAccount.Debit,"810105", CurrencyPayment.RUR, 300.0));
         server.addAccount(user.getPassport(), new Account(TypeAccount.Debit,"810107", CurrencyPayment.RUR, 300.0));
         assertThat(server.PhonePayment(user.getPassport(),user.getPassport(), new PaymentPhone(1, server.findByRequisite(user.getPassport(), "810105"),
-                server.findByRequisite(user.getPassport(), "810107"), "+79529008838", CurrencyPayment.RUR, 300.0))
+                server.findByRequisite(user.getPassport(), "810107"), new Phone("+79529008838"), CurrencyPayment.RUR, 300.0))
         , is(Boolean.TRUE));
     }
 }
