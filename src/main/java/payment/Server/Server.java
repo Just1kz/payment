@@ -51,8 +51,7 @@ public class Server implements PhonePayment {
 
     @Override
     public boolean PhonePayment(String srcPassport, String destPassport, PaymentPhone paymentPhone) {
-        paymentPhone.getPhone().checkPhonePattern();
-        paymentPhone.checkCurrency().checkAmount();
+        paymentPhone.checkAmount().checkCurrency().checkPhonePattern();
         boolean rsl = false;
         Account accountSrc = findByRequisite(srcPassport, paymentPhone.getAscAccount().getRequisite());
         Account accountDest = findByRequisite(destPassport, paymentPhone.getDscAccount().getRequisite());

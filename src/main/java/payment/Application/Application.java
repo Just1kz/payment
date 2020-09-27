@@ -21,8 +21,7 @@ public class Application {
     private int size = 0;
 
     public PaymentPhone add(PaymentPhone paymentPhone) {
-        paymentPhone.getPhone().checkPhonePattern();
-        paymentPhone.checkCurrency().checkAmount();
+        paymentPhone.checkAmount().checkCurrency().checkPhonePattern();
             paymentPhone.setId(ids++);
         if (findById(paymentPhone.getId()) != null) {
             paymentPhones.set(size++, paymentPhone);
