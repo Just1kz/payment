@@ -56,7 +56,7 @@ public class ServerTest {
 
         ValidationNumber validationNumber = new ValidationNumber(phone);
 
-        Predicate predicate = validationNumber::test;
+        Predicate<ValidationNumber> predicate = validationNumber::test;
 
         server.addUser(user.get());
         server.addAccount(user.get().getPassport(), new Account(TypeAccount.Debit,"810105", Currency.RUR, 300.0));
