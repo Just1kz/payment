@@ -22,10 +22,10 @@ public class ServerTest {
 
     @Test
     public void addAccount() {
-        User user = new User(1, "1234567", "Anton Belykh");
+        Optional<User> user = Optional.of(new User(1, "1234567", "Anton Belykh"));
         Server server = new Server();
-        server.addUser(user);
-        server.addAccount(user.getPassport(), new Account(TypeAccount.Debit,"810105", Currency.RUR, 150.0));
+        server.addUser(user.get());
+        server.addAccount(user.get().getPassport(), new Account(TypeAccount.Debit,"810105", Currency.RUR, 150.0));
         assertThat(server.findByRequisite("123", "810105"), is(Optional.empty()));
     }
 
