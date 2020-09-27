@@ -15,4 +15,15 @@ public class User {
     private String passport;
     private String name;
 
+    public int getId() {
+        return id;
+    }
+
+    public String getPassport() {
+        return passport;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import payment.Common.PaymentPhone;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -21,17 +22,17 @@ public class Application {
     private int size = 0;
 
     public PaymentPhone add(PaymentPhone paymentPhone) {
-        paymentPhone.checkAmount().checkCurrency().checkPhonePattern();
+        paymentPhone.checkAmount().checkCurrency().checkPhone();
             paymentPhone.setId(ids++);
-        if (findById(paymentPhone.getId()) != null) {
+        if (findById(paymentPhone.getId()).isPresent()) {
             paymentPhones.set(size++, paymentPhone);
         }
         return paymentPhone;
     }
 
-    public PaymentPhone findById(int id) {
+    public Optional<PaymentPhone> findById(int id) {
         int index = indexOf(id);
-        return index != -1 ? paymentPhones.get(index) : null;
+        return index != -1 ? Optional.ofNullable(paymentPhones.get(index)) : Optional.empty();
     }
 
     private int indexOf(int id) {

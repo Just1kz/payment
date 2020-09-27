@@ -4,20 +4,21 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Getter
 @Setter
 
 public class PaymentPhone {
     private int id;
-    private Account ascAccount;
-    private Account dscAccount;
+    private Optional<Account> ascAccount;
+    private Optional<Account> dscAccount;
     private Date date;
     private Phone phone;
     private Currency currency;
     private double paymentAmount;
 
-    public PaymentPhone(int id, Account ascAccount, Account dscAccount, Phone phone, Currency currency, double paymentAmount) {
+    public PaymentPhone(int id, Optional<Account> ascAccount, Optional<Account> dscAccount, Phone phone, Currency currency, double paymentAmount) {
         this.id = id;
         this.ascAccount = ascAccount;
         this.dscAccount = dscAccount;
@@ -27,13 +28,9 @@ public class PaymentPhone {
         this.paymentAmount = paymentAmount;
     }
 
-    public Phone checkPhonePattern () {
-        String rsl = phone.toString();
-        rsl.replace(" ", "");
-        if (!rsl.matches("^(8|\\+7)(([\\- ]?\\(?\\d{3}\\)?[\\- ]?)?(\\d{3}[\\- ]?)?(\\d{2}[\\- ]?)?\\d{2}$)?")) {
-            throw new PaymentValidationException("Invalid format phone number: " + phone);
-        }
-        return this.phone;
+    public PaymentPhone checkPhone () {
+        phone.checkPhonePattern();
+        return this;
     }
 
     public PaymentPhone checkCurrency () {

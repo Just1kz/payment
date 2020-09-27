@@ -10,4 +10,14 @@ import lombok.ToString;
 
 public class Phone <X>{
     private X phone;
+
+    public Phone<X> checkPhonePattern () {
+        String rsl = phone.toString();
+        boolean abc = rsl.matches("^(8|\\+7)(([\\- ]?\\(?\\d{3}\\)?[\\- ]?)?(\\d{3}[\\- ]?)?(\\d{2}[\\- ]?)?\\d{2}$)?");
+        if (!abc) {
+            throw new PaymentValidationException("Invalid format phone number: " + this.phone);
+        }
+        return this;
+    }
+
 }
