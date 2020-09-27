@@ -2,7 +2,6 @@ package payment.Server;
 
 import payment.Common.Account;
 import payment.Common.PaymentPhone;
-import payment.Server.Validation.ValidationNumber;
 import payment.User.User;
 
 import java.util.*;
@@ -11,6 +10,7 @@ import java.util.function.Predicate;
 public class Server implements PhonePayment {
 
     private final Map<Optional<User>, List<Account>> users = new HashMap<>();
+    private final Map<Optional<PaymentPhone>, StatusPayment> result = new HashMap<>();
 
     public void addUser(User user) {
         users.putIfAbsent(Optional.ofNullable(user), new ArrayList<Account>());
@@ -47,6 +47,7 @@ public class Server implements PhonePayment {
     @Override
     public boolean PhonePayment(String srcPassport, String destPassport, PaymentPhone paymentPhone, Predicate predicate) {
         paymentPhone.checkAmount().checkCurrency();
+        result.put(Optional.of(paymentPhone), new StatusPayment(false));
         boolean rsl = false;
         Optional<Account> accountSrc = findByRequisite(srcPassport, paymentPhone.getAscAccount().get().getRequisite());
         Optional<Account> accountDest = findByRequisite(destPassport, paymentPhone.getDscAccount().get().getRequisite());
@@ -54,6 +55,7 @@ public class Server implements PhonePayment {
             accountSrc.get().setBalance(accountSrc.get().getBalance() - paymentPhone.getAmount());
             accountDest.get().setBalance(accountDest.get().getBalance() + paymentPhone.getAmount());
             rsl = true;
+            result.get(paymentPhone).setStatus(true);
         }
         return rsl;
     }
