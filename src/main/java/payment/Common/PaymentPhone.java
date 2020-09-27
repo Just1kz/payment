@@ -14,10 +14,10 @@ public class PaymentPhone {
     private Account dscAccount;
     private Date date;
     private Phone phone;
-    private CurrencyPayment paymentCurrency;
+    private Currency paymentCurrency;
     private double paymentAmount;
 
-    public PaymentPhone(int id, Account ascAccount, Account dscAccount, Phone phone, CurrencyPayment paymentCurrency, double paymentAmount) {
+    public PaymentPhone(int id, Account ascAccount, Account dscAccount, Phone phone, Currency paymentCurrency, double paymentAmount) {
         this.id = id;
         this.ascAccount = ascAccount;
         this.dscAccount = dscAccount;

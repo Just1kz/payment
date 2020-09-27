@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Account {
     private TypeAccount typeAccount;
     private String requisite;
-    private CurrencyPayment currency;
+    private Currency currency;
     private double balance;
 
 }
