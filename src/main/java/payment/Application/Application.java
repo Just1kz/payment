@@ -7,6 +7,7 @@ import payment.Common.PaymentPhone;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Getter
 @Setter
@@ -21,8 +22,8 @@ public class Application {
     private int ids = 1;
     private int size = 0;
 
-    public PaymentPhone add(PaymentPhone paymentPhone) {
-        paymentPhone.checkAmount().checkCurrency().checkPhone();
+    public PaymentPhone add(PaymentPhone paymentPhone, Predicate predicate) {
+//        paymentPhone.checkAmount().checkCurrency().checkPhone();
             paymentPhone.setId(ids++);
         if (findById(paymentPhone.getId()).isPresent()) {
             paymentPhones.set(size++, paymentPhone);

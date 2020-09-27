@@ -2,9 +2,11 @@ package payment.Server;
 
 import payment.Common.Account;
 import payment.Common.PaymentPhone;
+import payment.Server.Validation.ValidationNumber;
 import payment.User.User;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class Server implements PhonePayment {
 
@@ -43,8 +45,9 @@ public class Server implements PhonePayment {
     }
 
     @Override
-    public boolean PhonePayment(String srcPassport, String destPassport, PaymentPhone paymentPhone) {
-        paymentPhone.checkAmount().checkCurrency().checkPhone();
+    public boolean PhonePayment(String srcPassport, String destPassport, PaymentPhone paymentPhone, Predicate predicate) {
+        //paymentPhone.checkAmount().checkCurrency().checkPhone();
+        //validationNumber.test(paymentPhone.getPhone());
         boolean rsl = false;
         Optional<Account> accountSrc = findByRequisite(srcPassport, paymentPhone.getAscAccount().get().getRequisite());
         Optional<Account> accountDest = findByRequisite(destPassport, paymentPhone.getDscAccount().get().getRequisite());

@@ -29,7 +29,7 @@ public class PaymentPhone {
     }
 
     public PaymentPhone checkPhone () {
-        phone.checkPhonePattern();
+        phone.checkPhone();
         return this;
     }
 

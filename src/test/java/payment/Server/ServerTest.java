@@ -2,9 +2,11 @@ package payment.Server;
 
 import org.junit.Test;
 import payment.Common.*;
+import payment.Server.Validation.ValidationNumber;
 import payment.User.User;
 
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -51,10 +53,15 @@ public class ServerTest {
         Optional<User> user = Optional.of(new User(1, "1234567", "Anton Belykh"));
         Server server = new Server();
         Phone<String> phone = new Phone<>("+79529008838");
+
+        ValidationNumber validationNumber = new ValidationNumber(phone);
+
+        Predicate predicate = validationNumber::test;
+
         server.addUser(user.get());
         server.addAccount(user.get().getPassport(), new Account(TypeAccount.Debit,"810105", Currency.RUR, 300.0));
         server.addAccount(user.get().getPassport(), new Account(TypeAccount.Debit,"810107", Currency.RUR, 300.0));
         assertThat(server.PhonePayment(user.get().getPassport(), user.get().getPassport(), new PaymentPhone(1,server.findByRequisite(user.get().getPassport(),"810105"),
-                server.findByRequisite(user.get().getPassport(), "810107"), phone, Currency.RUR, 300.0)), is(Boolean.TRUE));
+                server.findByRequisite(user.get().getPassport(), "810107"), phone, Currency.RUR, 300.0),predicate), is(Boolean.TRUE));
     }
 }

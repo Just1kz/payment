@@ -11,7 +11,7 @@ import lombok.ToString;
 public class Phone <X>{
     private X phone;
 
-    public Phone<X> checkPhonePattern () {
+    public Phone<X> checkPhone() {
         String rsl = phone.toString();
         boolean abc = rsl.matches("^(8|\\+7)(([\\- ]?\\(?\\d{3}\\)?[\\- ]?)?(\\d{3}[\\- ]?)?(\\d{2}[\\- ]?)?\\d{2}$)?");
         if (!abc) {
