@@ -16,16 +16,16 @@ public class PaymentPhone {
     private Date date;
     private Phone phone;
     private Currency currency;
-    private double paymentAmount;
+    private double amount;
 
-    public PaymentPhone(int id, Optional<Account> ascAccount, Optional<Account> dscAccount, Phone phone, Currency currency, double paymentAmount) {
+    public PaymentPhone(int id, Optional<Account> ascAccount, Optional<Account> dscAccount, Phone phone, Currency currency, double amount) {
         this.id = id;
         this.ascAccount = ascAccount;
         this.dscAccount = dscAccount;
         this.date = new Date();
         this.phone = phone;
         this.currency = currency;
-        this.paymentAmount = paymentAmount;
+        this.amount = amount;
     }
 
     public PaymentPhone checkPhone () {
@@ -41,8 +41,8 @@ public class PaymentPhone {
     }
 
     public PaymentPhone checkAmount () {
-        if (paymentAmount <= 0) {
-            throw new PaymentValidationException("Invalid amount payment: " + paymentAmount);
+        if (amount <= 0) {
+            throw new PaymentValidationException("Invalid amount payment: " + amount);
         }
         return this;
     }

@@ -48,9 +48,9 @@ public class Server implements PhonePayment {
         boolean rsl = false;
         Optional<Account> accountSrc = findByRequisite(srcPassport, paymentPhone.getAscAccount().get().getRequisite());
         Optional<Account> accountDest = findByRequisite(destPassport, paymentPhone.getDscAccount().get().getRequisite());
-        if (accountSrc.isPresent() && accountDest.isPresent() && accountSrc.get().getBalance() >= paymentPhone.getPaymentAmount()) {
-            accountSrc.get().setBalance(accountSrc.get().getBalance() - paymentPhone.getPaymentAmount());
-            accountDest.get().setBalance(accountDest.get().getBalance() + paymentPhone.getPaymentAmount());
+        if (accountSrc.isPresent() && accountDest.isPresent() && accountSrc.get().getBalance() >= paymentPhone.getAmount()) {
+            accountSrc.get().setBalance(accountSrc.get().getBalance() - paymentPhone.getAmount());
+            accountDest.get().setBalance(accountDest.get().getBalance() + paymentPhone.getAmount());
             rsl = true;
         }
         return rsl;
