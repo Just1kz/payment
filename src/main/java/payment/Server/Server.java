@@ -2,6 +2,7 @@ package payment.Server;
 
 import payment.Common.Account;
 import payment.Common.PaymentPhone;
+import payment.Common.PaymentValidationException;
 import payment.User.User;
 
 import java.util.*;
@@ -45,9 +46,17 @@ public class Server implements PhonePayment {
     }
 
     @Override
-    public boolean PhonePayment(String srcPassport, String destPassport, PaymentPhone paymentPhone, Predicate predicate) {
-        paymentPhone.checkAmount().checkCurrency();
-        result.put((paymentPhone), new StatusPayment(false));
+    public boolean PhonePayment(String srcPassport, String destPassport, PaymentPhone paymentPhone, Predicate<Double> predicate) {
+        try {
+            paymentPhone.checkPhone().checkCurrency();
+           if(predicate.test(paymentPhone.getAmount())) {
+               result.put((paymentPhone), new StatusPayment(false));
+           }
+        } catch (PaymentValidationException e) {
+            e.printStackTrace();
+            System.out.println(paymentPhone.getPhone().getPhone());
+            throw e;
+        }
         boolean rsl = false;
         Optional<Account> accountSrc = findByRequisite(srcPassport, paymentPhone.getAscAccount().getRequisite());
         Optional<Account> accountDest = findByRequisite(destPassport, paymentPhone.getDscAccount().getRequisite());

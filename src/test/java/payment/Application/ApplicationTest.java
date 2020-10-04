@@ -2,12 +2,7 @@ package payment.Application;
 
 import org.junit.Test;
 import payment.Common.*;
-import payment.Server.Validation.ValidationNumber;
-
 import java.util.Optional;
-import java.util.function.Predicate;
-
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -21,17 +16,15 @@ public class ApplicationTest {
         PaymentPhone paymentPhone = new PaymentPhone(1, ascAcc, dscAcc, phone, Currency.RUR, 300.00);
         Application app = new Application("123", "123", "123", "123");
 
-        Predicate<ValidationNumber> predicate = (validationNumber) -> phone.getPhone().matches("^(8|\\+7)(([\\- ]?\\(?\\d{3}\\)?[\\- ]?)?(\\d{3}[\\- ]?)?(\\d{2}[\\- ]?)?\\d{2}$)?");
+        app.add(paymentPhone);
 
-        app.add(paymentPhone, predicate);
-
-        assertThat(app.findById(1), is(paymentPhone));
+        assertThat(app.findById(1), is(Optional.of(paymentPhone)));
 
     }
 
     @Test
     public void findByIdNull() {
         Application app = new Application("123", "123", "123", "123");
-        assertNull(app.findById(1));
+        assertThat(app.findById(1), is(Optional.empty()));
     }
 }

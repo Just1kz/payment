@@ -7,7 +7,6 @@ import lombok.ToString;
 import payment.Common.PaymentPhone;
 
 import java.util.*;
-import java.util.function.Predicate;
 
 @Getter
 @Setter
@@ -29,15 +28,15 @@ public class Application {
         this.protocol = protocol;
     }
 
-    public Optional<PaymentPhone> add(PaymentPhone paymentPhone, Predicate predicate) {
-        paymentPhone.checkAmount().checkCurrency();
+    public Optional<PaymentPhone> add(PaymentPhone paymentPhone) {
+        paymentPhone.checkAmount().checkCurrency().checkPhone();
             paymentPhone.setId(ids);
                 paymentsPhone.put(ids++, paymentPhone);
         return Optional.of(paymentPhone);
     }
 
     public Optional<PaymentPhone> findById(int id) {
-        return Optional.of(paymentsPhone.get(id));
+        return Optional.ofNullable(paymentsPhone.get(id));
     }
 
 }
