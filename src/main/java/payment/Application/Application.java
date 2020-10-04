@@ -1,17 +1,26 @@
 package payment.Application;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import payment.Common.PaymentPhone;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+import java.util.function.Predicate;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@ToString
 
 public class Application {
     private String host;
     private String ip;
     private String port;
     private String protocol;
-    private final List<PaymentPhone> paymentPhones = new ArrayList<>();
+    private final Map<Integer, Optional<PaymentPhone>> paymentPhones = new HashMap<>();
     private int ids = 1;
-    private int size = 0;
 
     public Application(String host, String ip, String port, String protocol) {
         this.host = host;
@@ -20,61 +29,15 @@ public class Application {
         this.protocol = protocol;
     }
 
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public String getPort() {
-        return port;
-    }
-
-    public void setPort(String port) {
-        this.port = port;
-    }
-
-    public String getProtocol() {
-        return protocol;
-    }
-
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
-    }
-
-    public PaymentPhone add(PaymentPhone paymentPhone) {
-        paymentPhone.checkPrefix().checkLength().checkCurrency().checkAmount();
-            paymentPhone.setId(ids++);
-        if (findById(paymentPhone.getId()) != null) {
-            paymentPhones.set(size++, paymentPhone);
-        }
+    public Optional<PaymentPhone> add(Optional<PaymentPhone> paymentPhone, Predicate predicate) {
+        paymentPhone.get().checkAmount().checkCurrency();
+            paymentPhone.get().setId(ids);
+                paymentPhones.put(ids++, paymentPhone);
         return paymentPhone;
     }
 
-    public PaymentPhone findById(int id) {
-        int index = indexOf(id);
-        return index != -1 ? paymentPhones.get(index) : null;
-    }
-
-    private int indexOf(int id) {
-        int rsl = -1;
-        for (int index = 0; index < size; index++) {
-            if (paymentPhones.get(index).getId() == id) {
-                rsl = index;
-                break;
-            }
-        }
-        return rsl;
+    public Optional<PaymentPhone> findById(int id) {
+        return paymentPhones.get(id);
     }
 
 }
