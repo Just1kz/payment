@@ -11,14 +11,14 @@ import java.util.Optional;
 
 public class PaymentPhone {
     private int id;
-    private Optional<Account> ascAccount;
-    private Optional<Account> dscAccount;
+    private Account ascAccount;
+    private Account dscAccount;
     private Date date;
     private Phone phone;
     private Currency currency;
     private double amount;
 
-    public PaymentPhone(int id, Optional<Account> ascAccount, Optional<Account> dscAccount, Phone phone, Currency currency, double amount) {
+    public PaymentPhone(int id, Account ascAccount, Account dscAccount, Phone phone, Currency currency, double amount) {
         this.id = id;
         this.ascAccount = ascAccount;
         this.dscAccount = dscAccount;

@@ -19,7 +19,7 @@ public class Application {
     private String ip;
     private String port;
     private String protocol;
-    private final Map<Integer, Optional<PaymentPhone>> paymentPhones = new HashMap<>();
+    private final Map<Integer, PaymentPhone> paymentsPhone = new HashMap<>();
     private int ids = 1;
 
     public Application(String host, String ip, String port, String protocol) {
@@ -29,15 +29,15 @@ public class Application {
         this.protocol = protocol;
     }
 
-    public Optional<PaymentPhone> add(Optional<PaymentPhone> paymentPhone, Predicate predicate) {
-        paymentPhone.get().checkAmount().checkCurrency();
-            paymentPhone.get().setId(ids);
-                paymentPhones.put(ids++, paymentPhone);
-        return paymentPhone;
+    public Optional<PaymentPhone> add(PaymentPhone paymentPhone, Predicate predicate) {
+        paymentPhone.checkAmount().checkCurrency();
+            paymentPhone.setId(ids);
+                paymentsPhone.put(ids++, paymentPhone);
+        return Optional.of(paymentPhone);
     }
 
     public Optional<PaymentPhone> findById(int id) {
-        return paymentPhones.get(id);
+        return Optional.of(paymentsPhone.get(id));
     }
 
 }

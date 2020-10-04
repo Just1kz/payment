@@ -10,21 +10,21 @@ import java.util.function.Predicate;
 public class Server implements PhonePayment {
 
     private final Map<Optional<User>, List<Account>> users = new HashMap<>();
-    private final Map<Optional<PaymentPhone>, StatusPayment> result = new HashMap<>();
+    private final Map<PaymentPhone, StatusPayment> result = new HashMap<>();
 
     public void addUser(User user) {
-        users.putIfAbsent(Optional.ofNullable(user), new ArrayList<Account>());
+        users.putIfAbsent(Optional.of((user)), new ArrayList<Account>());
     }
 
     public void addAccount(String passport, Account account) {
         Optional<User> rsl = findByPassport(passport);
-        if (rsl.isPresent() && !users.get(rsl).contains(account)) {
+        if (!users.get(rsl).contains(account)) {
             users.get(rsl).add(account);
         }
     }
 
     public Optional<User> findByPassport(String passport) {
-        for (Optional<User> find : users.keySet()) {
+        for (Optional <User> find : users.keySet()) {
             if (find.isPresent() && find.get().getPassport().equals(passport)) {
                 return find;
             }
@@ -47,10 +47,10 @@ public class Server implements PhonePayment {
     @Override
     public boolean PhonePayment(String srcPassport, String destPassport, PaymentPhone paymentPhone, Predicate predicate) {
         paymentPhone.checkAmount().checkCurrency();
-        result.put(Optional.of(paymentPhone), new StatusPayment(false));
+        result.put((paymentPhone), new StatusPayment(false));
         boolean rsl = false;
-        Optional<Account> accountSrc = findByRequisite(srcPassport, paymentPhone.getAscAccount().get().getRequisite());
-        Optional<Account> accountDest = findByRequisite(destPassport, paymentPhone.getDscAccount().get().getRequisite());
+        Optional<Account> accountSrc = findByRequisite(srcPassport, paymentPhone.getAscAccount().getRequisite());
+        Optional<Account> accountDest = findByRequisite(destPassport, paymentPhone.getDscAccount().getRequisite());
         if (accountSrc.isPresent() && accountDest.isPresent() && accountSrc.get().getBalance() >= paymentPhone.getAmount()) {
             accountSrc.get().setBalance(accountSrc.get().getBalance() - paymentPhone.getAmount());
             accountDest.get().setBalance(accountDest.get().getBalance() + paymentPhone.getAmount());
