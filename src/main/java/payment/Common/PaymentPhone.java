@@ -2,11 +2,14 @@ package payment.Common;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 @Getter
 @Setter
 
+@Component("paymentPhone")
 public class PaymentPhone {
     private int id;
     private Account ascAccount;
@@ -45,4 +48,16 @@ public class PaymentPhone {
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "PaymentPhone{" +
+                "id=" + id +
+                ", ascAccount=" + ascAccount +
+                ", dscAccount=" + dscAccount +
+                ", date=" + date +
+                ", phone=" + phone +
+                ", currency=" + currency +
+                ", amount=" + amount +
+                '}';
+    }
 }

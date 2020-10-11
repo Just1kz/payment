@@ -1,19 +1,21 @@
 package payment.User;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
 
+@Component("user")
 public class User {
     private int id;
     private String passport;
     private String name;
+
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -26,4 +28,14 @@ public class User {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", passport='" + passport + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
+
