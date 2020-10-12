@@ -9,6 +9,8 @@ import java.util.*;
 import java.util.function.Predicate;
 
 public class Server implements PhonePayment {
+    public Server() {
+    }
 
     private final Map<Optional<User>, List<Account>> users = new HashMap<>();
     private final Map<PaymentPhone, StatusPayment> result = new HashMap<>();
