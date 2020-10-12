@@ -1,15 +1,13 @@
 package payment.Common;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 
 @Component()
 public class Account {
@@ -21,13 +19,4 @@ public class Account {
     public Account() {
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "typeAccount=" + typeAccount +
-                ", requisite='" + requisite + '\'' +
-                ", currency=" + currency +
-                ", balance=" + balance +
-                '}';
-    }
 }

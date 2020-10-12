@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 
 @Component("user")
 public class User {
@@ -29,13 +30,5 @@ public class User {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", passport='" + passport + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }
 
