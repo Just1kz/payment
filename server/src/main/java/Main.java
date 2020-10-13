@@ -1,17 +1,17 @@
-package payment;
-
+import Common.Account;
+import Common.PaymentPhone;
+import Server.Server;
+import Common.User;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import payment.Common.Account;
-import payment.Common.PaymentPhone;
-import payment.Server.Server;
-import payment.User.User;
 
-@ComponentScan(basePackages = "payment")
+
+@ComponentScan()
 public class Main {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+        User user = context.getBean("user", User.class);
         User userTest = context.getBean("user", User.class);
         Server serverTest = context.getBean("server", Server.class);
         //Phone phone = context.getBean("phone", Phone.class);
@@ -20,7 +20,7 @@ public class Main {
         Account accountDscTest = context.getBean("accountDsc", Account.class);
         PaymentPhone pp = context.getBean("paymentPhone", PaymentPhone.class);
 
-        serverTest.addUser(userTest);
+        serverTest.addUser(user);
         serverTest.addAccount(userTest.getPassport(),accountAscTest);
         serverTest.addAccount(userTest.getPassport(), accountDscTest);
         serverTest.PhonePayment(userTest.getPassport(), userTest.getPassport(), pp, (Double x) ->

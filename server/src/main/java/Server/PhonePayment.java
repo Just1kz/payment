@@ -1,6 +1,7 @@
-package payment.Server;
+package Server;
 
-import payment.Common.PaymentPhone;
+import Common.PaymentPhone;
+
 import java.util.function.Predicate;
 
 public interface PhonePayment {

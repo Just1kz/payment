@@ -1,9 +1,9 @@
-package payment.Server;
+package Server;
 
-import payment.Common.Account;
-import payment.Common.PaymentPhone;
-import payment.Common.PaymentValidationException;
-import payment.User.User;
+import Common.Account;
+import Common.PaymentPhone;
+import Common.PaymentValidationException;
+import Common.User;
 
 import java.util.*;
 import java.util.function.Predicate;

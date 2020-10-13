@@ -1,4 +1,4 @@
-package payment.Common;
+package Common;
 
 import lombok.*;
 import org.springframework.stereotype.Component;

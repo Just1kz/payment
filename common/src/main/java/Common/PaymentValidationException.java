@@ -1,4 +1,4 @@
-package payment.Common;
+package Common;
 
 public class PaymentValidationException extends RuntimeException{
 

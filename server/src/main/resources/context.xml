@@ -5,34 +5,34 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="user" class="payment.User.User">
+    <bean id="user" class="Common.User">
         <property name="id" value="1"/>
         <property name="passport" value="1234567"/>
         <property name="name" value="Anton Belykh"/>
     </bean>
 
-    <bean id="server" class="payment.Server.Server">
+    <bean id="server" class="Server.Server">
     </bean>
 
-    <bean id="phone" class="payment.Common.Phone">
+    <bean id="phone" class="Common.Phone">
         <constructor-arg value="+79529008838"/>
     </bean>
     
-    <bean id="accountAsc" class="payment.Common.Account">
+    <bean id="accountAsc" class="Common.Account">
         <property name="typeAccount" value="Debit"/>
         <property name="requisite" value="810105" />
         <property name="currency" value="RUR" />
         <property name="balance" value="300.0"/>
     </bean>
 
-    <bean id="accountDsc" class="payment.Common.Account">
+    <bean id="accountDsc" class="Common.Account">
         <property name="typeAccount" value="Debit"/>
         <property name="requisite" value="810107" />
         <property name="currency" value="RUR" />
         <property name="balance" value="300.0"/>
     </bean>
 
-    <bean id="paymentPhone" class="payment.Common.PaymentPhone">
+    <bean id="paymentPhone" class="Common.PaymentPhone">
         <constructor-arg value="1"/>
         <constructor-arg ref="accountAsc"/>
         <constructor-arg ref="accountDsc"/>

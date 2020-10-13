@@ -1,4 +1,4 @@
-package payment.Server;
+package Server;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

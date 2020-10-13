@@ -1,6 +1,5 @@
-package payment.Common;
+package Common;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
