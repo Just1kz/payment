@@ -1,6 +1,6 @@
-package Server;
+package FirstSpringBootApplication.Server;
 
-import Common.PaymentPhone;
+import FirstSpringBootApplication.domain.PaymentPhone;
 
 import java.util.function.Predicate;
 

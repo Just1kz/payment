@@ -1,9 +1,9 @@
-package Server;
+package FirstSpringBootApplication.Server;
 
-import Common.Account;
-import Common.PaymentPhone;
-import Common.PaymentValidationException;
-import Common.User;
+import FirstSpringBootApplication.domain.Account;
+import FirstSpringBootApplication.domain.PaymentPhone;
+import FirstSpringBootApplication.exception.PaymentValidationException;
+import FirstSpringBootApplication.domain.User;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -56,12 +56,12 @@ public class Server implements PhonePayment {
            }
         } catch (PaymentValidationException e) {
             e.printStackTrace();
-            System.out.println(paymentPhone.getPhone().getPhone());
+            System.out.println(paymentPhone.getPhone());
             throw e;
         }
         boolean rsl = false;
-        Optional<Account> accountSrc = findByRequisite(srcPassport, paymentPhone.getAscAccount().getRequisite());
-        Optional<Account> accountDest = findByRequisite(destPassport, paymentPhone.getDscAccount().getRequisite());
+        Optional<Account> accountSrc = findByRequisite(srcPassport, paymentPhone.getAscAccount());
+        Optional<Account> accountDest = findByRequisite(destPassport, paymentPhone.getDscAccount());
         if (accountSrc.isPresent() && accountDest.isPresent() && accountSrc.get().getBalance() >= paymentPhone.getAmount()) {
             accountSrc.get().setBalance(accountSrc.get().getBalance() - paymentPhone.getAmount());
             accountDest.get().setBalance(accountDest.get().getBalance() + paymentPhone.getAmount());

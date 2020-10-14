@@ -1,4 +1,4 @@
-package Common;
+package FirstSpringBootApplication.exception;
 
 public class PaymentValidationException extends RuntimeException{
 

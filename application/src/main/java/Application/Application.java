@@ -1,10 +1,10 @@
 package Application;
 
+import FirstSpringBootApplication.domain.PaymentPhone;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import payment.Common.PaymentPhone;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class Application {
 
     public Optional<PaymentPhone> add(PaymentPhone paymentPhone) {
         paymentPhone.checkAmount().checkCurrency().checkPhone();
-            paymentPhone.setId(ids);
+            paymentPhone.setId((long) ids);
                 paymentsPhone.put(ids++, paymentPhone);
         return Optional.of(paymentPhone);
     }

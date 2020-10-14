@@ -1,4 +1,4 @@
-package Server;
+package FirstSpringBootApplication.Server;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,3 +11,4 @@ import lombok.Setter;
 public class StatusPayment {
     private boolean status;
 }
+

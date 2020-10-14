@@ -1,13 +1,12 @@
-package Common;
+package FirstSpringBootApplication.domain;
 
+import FirstSpringBootApplication.exception.PaymentValidationException;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.stereotype.Component;
 
 @Getter
 @ToString
 
-@Component("phone")
 public class Phone <X>{
     private X phone;
 

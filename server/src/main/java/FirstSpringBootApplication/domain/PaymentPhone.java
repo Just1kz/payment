@@ -1,27 +1,44 @@
-package Common;
+package FirstSpringBootApplication.domain;
 
+import FirstSpringBootApplication.exception.PaymentValidationException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
 @ToString
 
-@Component("paymentPhone")
+@Entity
 public class PaymentPhone {
-    private int id;
-    private Account ascAccount;
-    private Account dscAccount;
-    private Date date;
-    private Phone phone;
-    private Currency currency;
-    private double amount;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Long id;
 
-    public PaymentPhone(int id, Account ascAccount, Account dscAccount, Phone phone, Currency currency, double amount) {
+    @JoinColumn(name = "ascAccount")
+    private String ascAccount;
+
+
+    @JoinColumn(name = "dscAccount")
+    private String dscAccount;
+
+    @JoinColumn(name = "date")
+    private Date date;
+
+    @JoinColumn(name = "phone")
+    private String phone;
+
+    @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "currency")
+    private Currency currency;
+
+    private double amount;
+    private boolean statusPayment;
+
+    public PaymentPhone(Long id, String ascAccount, String dscAccount, String phone, Currency currency, double amount) {
         this.id = id;
         this.ascAccount = ascAccount;
         this.dscAccount = dscAccount;
@@ -29,10 +46,13 @@ public class PaymentPhone {
         this.phone = phone;
         this.currency = currency;
         this.amount = amount;
+        this.statusPayment = false;
+    }
+
+    public PaymentPhone() {
     }
 
     public PaymentPhone checkPhone () {
-        phone.checkPhone();
         return this;
     }
 

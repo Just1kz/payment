@@ -1,8 +1,5 @@
-package Common;
+package FirstSpringBootApplication.domain;
 
-import org.springframework.stereotype.Component;
-
-@Component("typeAccount")
 public enum TypeAccount {
     Debit(1), Credit(2);
 
