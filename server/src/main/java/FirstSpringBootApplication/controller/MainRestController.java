@@ -7,14 +7,14 @@ import FirstSpringBootApplication.domain.TypeAccount;
 import FirstSpringBootApplication.repository.AccountRepo;
 import FirstSpringBootApplication.repository.PaymentRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
-@Controller
+@RestController
 public class MainRestController {
     @Autowired
     private PaymentRepo paymentRepo;
@@ -42,15 +42,14 @@ public class MainRestController {
                              @RequestParam String currency,
                              @RequestParam String amount,
                              Map<String, Object> model) {
-        String ascAccRq = String.valueOf(ascAccountRequisite);
-        String dscAccRq = String.valueOf(dscAccountRequisite);
+
         long idGo = Long.parseLong(id);
         double amGo = Double.parseDouble(amount);
         Currency curGo = Currency.EUR;
         if (currency.equals("Рубли")) {
             curGo = Currency.RUR;
         }
-        PaymentPhone paymentPhone = new PaymentPhone(idGo, ascAccRq, dscAccRq, phone,
+        PaymentPhone paymentPhone = new PaymentPhone(idGo, ascAccountRequisite, dscAccountRequisite, phone,
                 curGo, amGo);
         paymentRepo.save(paymentPhone);
         Iterable<PaymentPhone> payments = paymentRepo.findAll();
